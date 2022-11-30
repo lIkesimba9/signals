@@ -2,3 +2,4 @@ build/
 .vs/
 signal.pcm
 .ipynb_checkpoints
+.DS_Store
