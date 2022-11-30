@@ -10,8 +10,8 @@
 using namespace std;
 using namespace complex_literals;
 struct raw_pcm_sample {
-    short int real;
-    short int img;
+    int16_t real;
+    int16_t img;
     operator complex<double>() const {
         complex<double> value(real, img);
         return value;
@@ -102,9 +102,9 @@ public:
 
 
 
-vector<long long> compute_corr(vector<complex<double>>& data, size_t sinc_size, size_t data_size) {
+vector<double> compute_corr(vector<complex<double>>& data, size_t sinc_size, size_t data_size) {
     size_t i = 0, j = data_size;
-    vector<long long> corr;
+    vector<double> corr;
     for (; j < data.size() - sinc_size; ++j, ++i) {
         complex<double> value_corr = 0;
         for (size_t k = 0; k < sinc_size; ++k) {
@@ -115,12 +115,12 @@ vector<long long> compute_corr(vector<complex<double>>& data, size_t sinc_size, 
     return corr;
 }
 
-void dump_to_csv(vector<long long> & vec, string filename = "out.csv") {
+void dump_to_csv(vector<double> & vec, string filename = "out.csv") {
     ofstream out;
     out.open(filename);
     if (!out.is_open())
         return;
-    for (long long value : vec) {
+    for (double value : vec) {
         out << value << '\n';
     }
     out.close();
@@ -132,7 +132,7 @@ int main()
     size_t size_windows = 1152 * 2;
     SlidingWindows winwdow_generator(filename, size_windows);
     vector<complex<double>> window = winwdow_generator.next();
-    vector<long long> all_corr_value;
+    vector<double> all_corr_value;
     while (window.size() > 0)
     {
         auto corr_win = compute_corr(window, 128, 1024);
