@@ -1,1 +1,4 @@
 build/
+.vs/
+signal.pcm
+.ipynb_checkpoints
