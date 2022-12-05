@@ -1,0 +1,8 @@
+prefix_length 128
+data_length 1024
+frames_sum 1
+corr_burst 2e9
+find_flag_path find_flag
+correlation_path corr.txt
+correlation_file_max_size 1000000
+channel 0
